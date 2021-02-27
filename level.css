@@ -1,0 +1,120 @@
+@font-face{
+	font-family: "Lemon/Milk";
+	src: url("fonts/lemon/lemonmilk-webfont.ttf") format("truetype");
+}
+
+@font-face{
+	font-family: "Assembled From Scratch";
+	src: url("fonts/assembled/assembled_from_scratch-webfont.ttf") format("truetype");
+} 
+
+body{
+	background-color: rgb(255, 192, 0);
+}
+
+h1{
+	width: 8em;
+	height: 1.5em;
+	font-size: 7em;
+	color: white;
+	background-color: rgb(51, 63, 80);
+	box-shadow: 0px 10px rgba(0, 0, 0, 0.65);
+	text-align: center;
+	padding-bottom: 15px;
+	padding-top: 50px;
+	margin: auto;
+	font-family: "Assembled From Scratch", sans-serif;
+}
+
+h2{
+	text-decoration: none;
+	font-family: "Lemon/Milk", sans-serif;
+	font-size:4em;
+	display: inline-block;
+	width: 1.3em;
+	height: auto;
+	text-align: center;
+	color: white;
+	padding: 7px;
+	background-color: rgb(84, 130, 53);
+	box-shadow: 0px 10px rgba(0, 0, 0, 0.65);
+	margin: 15px;
+	margin-top :30px;
+	position: relative;
+	bottom: 0;
+	transition: background-color 0.1s, box-shadow 0.1s, width 0.1s, bottom 0.1s;
+}
+
+h2:hover{
+	box-shadow: 10px 15px rgba(0, 0, 0, 0.65);
+	background-color: rgb(20, 144, 106);
+	width: 1.6em;
+	bottom: 10px;
+}
+
+input{
+	color: white;
+	font-family: "Lemon/Milk", sans-serif;
+	margin: 10px;
+	padding: 5px 50px;
+	background-color: rgb(232, 92, 54);
+	box-shadow: 0px 10px rgba(0, 0, 0, 0.65);
+	border: 0px;
+	font-size: 2em;
+	display: inline-block;
+	transition: background-color 0.1s, box-shadow 0.1s;
+}
+
+input:hover{
+	background-color: rgb(109, 68, 140);
+	box-shadow: 10px 15px rgba(0, 0, 0, 0.65);
+}
+
+#buttons{
+	display: inline-block;
+}
+
+header{
+	height: 9em;
+}
+
+p{
+	float: left;
+	font-family: "Lemon/Milk", sans-serif;
+	margin: 0;
+	margin-left: 10px;
+	color: rgb(51, 63, 80);
+	font-size: 4em;
+}
+
+#lives{
+	color: white;
+	background-color: rgb(232, 92, 54);
+	display: inline-block;
+	margin-right: 0.3em;
+	width: 6em;
+	text-align: center;
+	margin-top: 0.7em;
+	font-size: 	3em;
+	float: right;
+	padding: 0.01em 0.5em;
+	box-shadow: 10px 10px rgba(0, 0, 0, 0.65);
+}
+
+#counter{
+	color: white;
+	background-color: rgb(232, 92, 54);
+	display: inline-block;
+	margin-right: 0.4em;
+	width: 7em;
+	padding: 0.01em 0.5em;
+	margin-top: 0.7em;
+	font-size: 	3em;
+	float: right;
+	box-shadow: 10px 10px rgba(0, 0, 0, 0.65);
+}
+
+#letters{
+	display: inline-block;
+	
+}

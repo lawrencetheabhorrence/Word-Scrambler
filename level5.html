@@ -1,0 +1,199 @@
+<DOCTYPE! html>
+<html>
+	<head>
+		<title>Word Unscrambler</title>
+		<meta charset = "UTF-8">
+		<link rel = "stylesheet" type = "text/css" href = "level.css">
+	</head>
+	
+	<body>
+		<header id = "top">
+			<p><span style = "font-size: 2em; position: relative; bottom: 0.18em;">5 !</span></p>
+			<div style = "text-align: center;">
+				<p id = "counter" style = "display: inline-block;"> 0 / 20 Words</p>
+			</div>
+			<p id = "lives">Lives: 5</p>
+		</header>
+	
+		<h1 id = "output"></h1>
+		
+		<div style = "text-align: center;">
+			<div id = "letters">
+				<h2 class = "alpha" onclick = "letter_clk(0);">t</h2>
+				<h2 class = "alpha" onclick = "letter_clk(1);">o</h2>
+				<h2 class = "alpha" onclick = "letter_clk(2);">s</h2>
+				<h2 class = "alpha" onclick = "letter_clk(3);">l</h2>
+				<h2 class = "alpha" onclick = "letter_clk(4);">u</h2>
+				<h2 class = "alpha" onclick = "letter_clk(5);">e</h2>
+			</div>
+			<a id = "level"><input id = "level_button" value = "Next!" type = "button"  style = "display: none; margin-top: 1em;" onclick = "next_level();"></input></a>	
+		
+		<div style = "text-align: center;">
+			<div id = "buttons">
+				<input value = "Scramble!" type = "button" onclick = "Scrambler_chck()" class = "clickers"></input>
+				<input type = "button" value = "Clear!" onclick = "letter_cl();" class = "clickers"></input>
+				<input value = "Submit!" type = "button" onclick = "word_Submit();" class = "clickers"></input>
+			</div>
+		</div>
+		
+		
+		<script>
+			word = "";
+			prev_scramble = "";
+			counter = 0;
+			lives = 5;
+			onhold = 6;
+			
+			//change onhold to max word length
+			
+			letter_list = document.getElementsByClassName("alpha");
+			avails = ["s", "o", "l" , "u", "t", "e"];			
+			valid_words = ["solute", "tousle", "lotus", "louse", "louts", "lutes", "ousel", "stole", "telos", "toles", "tolus", "touse", "tules", "lest", "lets", "lose", "lost", "lots", "lout", "lues", "lust", "lute", "oles", "oust", "outs", "sloe", "slot", "slue", "slut", "sole", "soul", "suet", "tels", "toes", "tole", "tolu", "tule", "utes", "els", "les", "let", "leu", "lot", "oes", "ole", "ose", "out", "sel", "set", "sol", "sue", "tel", "toe", "use", "ute", "uts", "el", "es", "et", "lo", "oe", "os", "so", "to", "us", "ut"];
+			used_words = [];
+
+			function letter_clk(i){
+				word = word + letter_list[i].innerHTML;
+				letter_list[i].style.visibility = "hidden";
+				document.getElementById("output").innerHTML = word;
+				
+				//change x to max word length
+				for(x = 0; x < 6; x++){
+					if(letter_list[i].innerHTML == avails[x]){
+						avails.splice(x, 1);
+					}
+				}
+				
+				onhold--;
+			}
+
+			function letter_cl(){
+				document.getElementById("output").innerHTML = "";
+				word = "";
+				avails = ["s", "o", "l" , "u", "t", "e"];
+				onhold = 6;
+				
+				//change i to max word length
+				for(i = 0; i < 6; i++){
+					letter_list[i].style.visibility = "visible";
+				}
+			}
+			
+			function Scrambler_chck(){
+				scram_check = 1;	
+				sw1 = 0;
+				x1 = 0;
+				
+				while (scram_check == 1){
+					scram_check = 0;
+					
+					scrambler = "";
+				
+					//scrambles the letters
+					for(i = 0; i < onhold; i++){
+						random_num = Math.floor(Math.random() * onhold);
+						
+						holder = avails[i];
+						avails[i] = avails[random_num];
+						avails[random_num] = holder;
+					}
+					
+					//turns the avail to a word (idk if this is necessary)
+					for(i = 0; i < onhold; i++){
+						scrambler = scrambler + avails[i];
+					}
+					
+					//checks if scrambled word is a valid word
+					//change i to num of valid words
+					for(i = 0; i < 68; i++){
+						if (scrambler == valid_words[i]){
+							scram_check = 1;
+						}
+					}
+					
+					//removes duplicates
+					if (scrambler == prev_scramble){
+						scram_check = 1;
+					}
+					
+				}
+				
+				//change i to max word length
+				for(i = 0; i < 6; i++){
+					sw1 = 0;
+					//change a to max word length
+					for(a = 0; a < onhold; a++){
+						if(letter_list[i].innerHTML == avails[a]){
+							sw1 = 1;
+						}
+					}
+					
+					if(sw1 == 1){
+						letter_list[i].innerHTML = avails[x1];
+						x1++;
+					}
+				}
+					
+				prev_scramble = scrambled;
+				
+			}
+			
+			function word_Submit(){
+				valid_check = 0;
+				used_check = 0;
+				
+				//change i to number of valid words
+				for(i = 0; i < 68; i++){
+					if (word == valid_words[i]){
+						valid_check = 1;
+					}
+				}
+				
+				if (valid_check == 1){
+					
+					if(counter != 0){
+						for(i = 0; i <= counter - 1; i++){
+							if (word == used_words[i]){
+								used_check = 1;
+							}
+						}
+					}
+					
+					if(used_check == 0){
+						used_words.push(word);
+						counter++;
+					}
+					
+				}
+				
+				else{
+					lives--;
+				}
+				
+				//change counter to number of valid words
+				if (counter == 20 || lives == 0){
+					document.getElementById("counter").innerHTML = counter + " / 20 Words";
+					document.getElementById("level_button").style.display = "inline-block";
+					//change i to max word length
+					for(i = 0; i < 6; i++){
+						letter_list[i].style.display = "none";
+					}
+				}
+				
+				document.getElementById("counter").innerHTML = counter + " / 20 Words";
+				document.getElementById("lives").innerHTML = "Lives: " + lives;
+				
+				letter_cl();
+			}
+			
+			function next_level(){
+				if (counter == 20){
+					document.getElementById("level").href = "level5_win.html";
+				}
+				
+				if (lives == 0){
+					document.getElementById("level").href = "level5_lose.html";
+				}
+			}
+		</script>
+		
+	</body>
